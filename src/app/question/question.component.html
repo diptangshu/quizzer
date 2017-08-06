@@ -1,55 +1,48 @@
-  <div class="ui header">Question #5 <a href="#"><i class="grey flag icon"></i></a></div>
-  <p>
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed hendrerit maximus mi ac pulvinar. Vestibulum vestibulum, odio sit amet volutpat fringilla, nibh risus rhoncus lectus, quis blandit urna risus et nulla. Quisque nunc neque, varius sit amet quam vitae, pellentesque dignissim tortor. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; In dolor nibh, ultrices id semper eu, sollicitudin id leo.
-  </p>
-  <div class="ui divider"></div>
+<div class="ui header">
+  Question #{{question.sequence}}
+  <a (click)="toggleFlag()">
+    <i class="flag icon" [class.red]="flagged" [class.grey]="!flagged"></i>
+  </a>
+</div>
+<div class="center aligned" [innerHTML]="question.body"></div>
+<p *ngIf="question.hint && question.hint.length" class="ui info message">
+  <i class="warning icon"></i>
+  {{question.hint}}
+</p>
 
-  <div class="ui form">
-    <div class="grouped fields">
-      <label for="answer">Select an answer</label>
-      <div class="field">
-        <div class="ui radio checkbox">
-          <input type="radio" name="answer" class="hidden">
-          <label>A. Lorem ipsum</label>
-        </div>
-      </div>
-      <div class="field">
-        <div class="ui radio checkbox">
-          <input type="radio" iname="answer" class="hidden">
-          <label>B. Lorem ipsum</label>
-        </div>
-      </div>
-      <div class="field">
-        <div class="ui radio checkbox">
-          <input type="radio" name="answer" class="hidden">
-          <label>C. Lorem ipsum</label>
-        </div>
-      </div>
-      <div class="field">
-        <div class="ui radio checkbox">
-          <input type="radio" name="answer" class="hidden">
-          <label>D. Lorem ipsum</label>
-        </div>
+<div class="ui divider"></div>
+
+<div class="ui form">
+  <div class="grouped fields">
+    <label for="answer">Select {{question.answer.correct.length | word}}</label>
+    <div class="field answer" *ngFor="let answer of question.answer.choices; let i = index">
+      <div class="ui radio checkbox">
+        <input type="radio" name="answer" class="hidden">
+        <label>
+          <span class="index">{{i | alphabet:'A'}}.</span>
+          <span class="body">{{answer}}</span>
+        </label>
       </div>
     </div>
   </div>
+</div>
 
 
-  <div class="ui divider"></div>
+<div class="ui divider"></div>
 
-  <div class="ui stackable two column grid">
-    <div class="eight wide column">
-      <button class="ui basic large button">
-        <i class="grey flag icon"></i>
-        Flag for Later
-      </button>
-      <button class="ui large positive right labeled icon button">
-        <i class="right arrow icon"></i>Next
-      </button>
-    </div>
-    <div class="right floated right aligned two wide column">
-      <a class="fluid ui icon button">
-        Review All
-      </a>
-    </div>
+<div class="ui stackable two column grid">
+  <div class="eight wide column">
+    <button class="ui basic large button" (click)="toggleFlag()">
+      <i class="flag icon" [class.red]="flagged" [class.grey]="!flagged"></i>
+      Review Later
+    </button>
+    <button class="ui large positive right labeled icon button">
+      <i class="right arrow icon"></i>Next
+    </button>
   </div>
+  <div class="right floated right aligned four wide column">
+    <a class="ui icon button">
+      Review All
+    </a>
+  </div>
+</div>

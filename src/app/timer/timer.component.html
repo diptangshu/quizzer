@@ -1,0 +1,8 @@
+<h3>
+  <i [ngClass]="['icon', 'hourglass', iconState]"></i>
+  <span class="hours">{{hours}}</span>
+  <span class="blink">:</span>
+  <span class="minutes">{{minutes | padding:2:'0' }}</span>
+  <span class="blink">:</span>
+  <span class="seconds">{{seconds | padding:2:'0' }}</span>
+</h3>

@@ -8,6 +8,10 @@ import { TopNavComponent } from './top-nav/top-nav.component';
 import { FooterComponent } from './footer/footer.component';
 import { QuizProgressComponent } from './quiz-progress/quiz-progress.component';
 import { QuestionComponent } from './question/question.component';
+import { AlphabetPipe } from './pipes/alphabet.pipe';
+import { WordPipe } from './pipes/word.pipe';
+import { TimerComponent } from './timer/timer.component';
+import { PaddingPipe } from './pipes/padding.pipe';
 
 @NgModule({
   declarations: [
@@ -15,7 +19,11 @@ import { QuestionComponent } from './question/question.component';
     TopNavComponent,
     FooterComponent,
     QuizProgressComponent,
-    QuestionComponent
+    QuestionComponent,
+    AlphabetPipe,
+    WordPipe,
+    TimerComponent,
+    PaddingPipe
   ],
   imports: [
     BrowserModule,

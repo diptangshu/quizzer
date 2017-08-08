@@ -24,4 +24,21 @@ export class QuizQuestionComponent implements OnInit {
   }
 
   toggleFlag() { this.flagged = !this.flagged; }
+
+  hasMultipleAnswers(): boolean {
+    // TODO Refactor logic to domain class Question.
+    if (!this.question) return false;
+
+    if (!this.question.answer) {
+      console.error('No answer choices specified with question!');
+      return false;
+    }
+
+    if (!this.question.answer.correct) {
+      console.error('No correct answer specified with question!');
+      return false;
+    }
+
+    return this.question.answer.correct.length > 1;
+  }
 }

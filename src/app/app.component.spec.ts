@@ -1,4 +1,5 @@
 import { TestBed, async } from '@angular/core/testing';
+import { NgSemanticModule } from 'ng-semantic';
 
 import { AppComponent } from './app.component';
 
@@ -29,6 +30,9 @@ describe('AppComponent', () => {
         AlphabetPipe,
         PaddingPipe,
         WordPipe
+      ],
+      imports: [
+        NgSemanticModule
       ],
       providers: [
         QuizService

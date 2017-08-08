@@ -18,7 +18,7 @@ export class QuizService {
 }</code></pre>
         <p>Some more text...</p>
       `,
-      hint: 'The vlaue passed in String.format() is...',
+      hint: 'The value passed in String.format() is...',
       answer: {
         choices: [ 'Diptangshu', 'Zubin', 'Diptchak', 'Guitarman'],
         correct: [0, 1]

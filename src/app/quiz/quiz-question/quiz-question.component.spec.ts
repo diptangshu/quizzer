@@ -33,4 +33,30 @@ describe('QuizQuestionComponent', () => {
   it('should be created', () => {
     expect(component).toBeTruthy();
   });
+
+  describe('hasMultipleAnswers()', () => {
+    it('should return false when question is empty', () => {
+      expect(component.hasMultipleAnswers()).toBeFalsy();
+    });
+
+    it('should return false when no answer is provided for question', () => {
+      component.question = {};
+      expect(component.hasMultipleAnswers()).toBeFalsy();
+    });
+
+    it('should return false when no correct answer is provided for question', () => {
+      component.question = { answer: {} };
+      expect(component.hasMultipleAnswers()).toBeFalsy();
+    });
+
+    it('should return false when only one correct answer', () => {
+      component.question = { answer: { correct: [0] } };
+      expect(component.hasMultipleAnswers()).toBeFalsy();
+    });
+
+    it('should return true when only one correct answer', () => {
+      component.question = { answer: { correct: [0, 1] } };
+      expect(component.hasMultipleAnswers()).toBeTruthy();
+    });
+  });
 });

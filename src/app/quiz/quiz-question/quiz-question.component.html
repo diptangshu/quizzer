@@ -18,15 +18,18 @@
   <div class="ui form">
     <div class="grouped fields">
       <label for="answer">Select {{question.answer.correct.length | word}}</label>
-      <div class="field answer" *ngFor="let answer of question.answer.choices; let i = index">
-        <div class="ui radio checkbox">
-          <input type="radio" name="answer" class="hidden">
-          <label>
-            <span class="index">{{i | alphabet:'A'}}.</span>
-            <span class="body">{{answer}}</span>
-          </label>
+      <form action="#">
+        <div class="field" *ngFor="let answer of question.answer.choices; let i = index">
+          <div class="ui checkbox" [class.radio]="!hasMultipleAnswers()">
+            <input type="{{ hasMultipleAnswers()? 'checkbox' : 'radio'}}"
+              name="answer" [id]="i" [value]="i">
+            <label [for]="i">
+              <span class="index">{{i | alphabet:'A'}}.</span>
+              <span class="body">{{answer}}</span>
+            </label>
+          </div>
         </div>
-      </div>
+      </form>
     </div>
   </div>
 

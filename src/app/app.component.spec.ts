@@ -4,13 +4,15 @@ import { AppComponent } from './app.component';
 
 import { TopNavComponent } from './top-nav/top-nav.component';
 import { FooterComponent } from './footer/footer.component';
-import { QuizProgressComponent } from './quiz-progress/quiz-progress.component';
-import { QuestionComponent } from './question/question.component';
+import { QuizProgressComponent } from './quiz/quiz-progress/quiz-progress.component';
+import { QuizQuestionComponent } from './quiz/quiz-question/quiz-question.component';
 import { TimerComponent } from './timer/timer.component';
 
 import { AlphabetPipe } from './pipes/alphabet.pipe';
 import { PaddingPipe } from './pipes/padding.pipe';
 import { WordPipe } from './pipes/word.pipe';
+
+import { QuizService } from './quiz/quiz.service';
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
@@ -21,13 +23,16 @@ describe('AppComponent', () => {
         FooterComponent,
         TimerComponent,
         TopNavComponent,
-        QuestionComponent,
+        QuizQuestionComponent,
         QuizProgressComponent,
         // Pipes
         AlphabetPipe,
         PaddingPipe,
         WordPipe
       ],
+      providers: [
+        QuizService
+      ]
     }).compileComponents();
   }));
 

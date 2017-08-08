@@ -6,12 +6,14 @@ import { HttpModule } from '@angular/http';
 import { AppComponent } from './app.component';
 import { TopNavComponent } from './top-nav/top-nav.component';
 import { FooterComponent } from './footer/footer.component';
-import { QuizProgressComponent } from './quiz-progress/quiz-progress.component';
-import { QuestionComponent } from './question/question.component';
+import { QuizProgressComponent } from './quiz/quiz-progress/quiz-progress.component';
+import { QuizQuestionComponent } from './quiz/quiz-question/quiz-question.component';
 import { AlphabetPipe } from './pipes/alphabet.pipe';
 import { WordPipe } from './pipes/word.pipe';
 import { TimerComponent } from './timer/timer.component';
 import { PaddingPipe } from './pipes/padding.pipe';
+
+import { QuizService } from './quiz/quiz.service';
 
 @NgModule({
   declarations: [
@@ -19,7 +21,7 @@ import { PaddingPipe } from './pipes/padding.pipe';
     TopNavComponent,
     FooterComponent,
     QuizProgressComponent,
-    QuestionComponent,
+    QuizQuestionComponent,
     AlphabetPipe,
     WordPipe,
     TimerComponent,
@@ -30,7 +32,9 @@ import { PaddingPipe } from './pipes/padding.pipe';
     FormsModule,
     HttpModule
   ],
-  providers: [],
+  providers: [
+    QuizService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

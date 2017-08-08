@@ -1,9 +1,9 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { QuizProgressComponent } from './quiz-progress.component';
-import { TimerComponent } from '../timer/timer.component';
+import { TimerComponent } from '../../timer/timer.component';
 
-import { PaddingPipe } from '../pipes/padding.pipe';
+import { PaddingPipe } from '../../pipes/padding.pipe';
 
 describe('QuizProgressComponent', () => {
   let component: QuizProgressComponent;

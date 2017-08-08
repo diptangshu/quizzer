@@ -1,0 +1,49 @@
+<!-- Empty segment displayed when question is not present -->
+<div id="question" *ngIf="!question" class="ui piled segment" [class.loading]="loading"></div>
+<div id="question" *ngIf="question" class="ui piled segment" [class.loading]="loading">
+  <div class="ui header">
+    Question #{{question.sequence}}
+    <a (click)="toggleFlag()">
+      <i class="flag icon" [class.red]="flagged" [class.grey]="!flagged"></i>
+    </a>
+  </div>
+  <div class="center aligned" [innerHTML]="question.body"></div>
+  <p *ngIf="question.hint && question.hint.length" class="ui info message">
+    <i class="warning icon"></i>
+    {{question.hint}}
+  </p>
+
+  <div class="ui divider"></div>
+
+  <div class="ui form">
+    <div class="grouped fields">
+      <label for="answer">Select {{question.answer.correct.length | word}}</label>
+      <div class="field answer" *ngFor="let answer of question.answer.choices; let i = index">
+        <div class="ui radio checkbox">
+          <input type="radio" name="answer" class="hidden">
+          <label>
+            <span class="index">{{i | alphabet:'A'}}.</span>
+            <span class="body">{{answer}}</span>
+          </label>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="answer-btns" class="ui stackable two column grid">
+    <div class="eight wide column">
+      <button class="ui basic large button" (click)="toggleFlag()">
+        <i class="flag icon" [class.red]="flagged" [class.grey]="!flagged"></i>
+        Review Later
+      </button>
+      <button class="ui large positive right labeled icon button">
+        <i class="right arrow icon"></i>Next
+      </button>
+    </div>
+    <div class="right floated right aligned four wide column">
+      <a class="ui icon button">
+        Review All
+      </a>
+    </div>
+  </div>
+</div>

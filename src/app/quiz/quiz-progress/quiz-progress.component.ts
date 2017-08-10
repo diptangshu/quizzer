@@ -1,4 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  Input,
+  Output,
+  EventEmitter
+} from '@angular/core';
 
 @Component({
   selector: 'app-quiz-progress',
@@ -7,9 +13,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class QuizProgressComponent implements OnInit {
 
+  @Input() time = 10; // seconds
+  @Output() timeUp = new EventEmitter();
+
   constructor() { }
 
   ngOnInit() {
+  }
+
+  hasExpired() {
+    this.timeUp.emit();
   }
 
 }

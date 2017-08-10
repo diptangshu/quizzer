@@ -1,6 +1,7 @@
-<!-- Empty segment displayed when question is not present -->
-<div id="question" *ngIf="!question" class="ui piled segment" [class.loading]="loading"></div>
-<div id="question" *ngIf="question" class="ui piled segment" [class.loading]="loading">
+<div id="question"
+  class="ui piled segment"
+  [class.loading]="!loaded"
+  [class.disabled]="!active">
   <div class="ui header">
     Question #{{question.sequence}}
     <a (click)="toggleFlag()">
@@ -15,12 +16,12 @@
 
   <div class="ui divider"></div>
 
-  <div class="ui form">
+  <div *ngIf="question.answer.choices" class="ui form">
     <div class="grouped fields">
       <label for="answer">Select {{question.answer.correct.length | word}}</label>
       <form action="#">
-        <div class="field" *ngFor="let answer of question.answer.choices; let i = index">
-          <div class="ui checkbox" [class.radio]="!hasMultipleAnswers()">
+        <div class="field answer-choices" *ngFor="let answer of question.answer.choices; let i = index">
+          <div [class.disabled]="!active" class="ui checkbox" [class.radio]="!hasMultipleAnswers()">
             <input type="{{ hasMultipleAnswers()? 'checkbox' : 'radio'}}"
               name="answer" [id]="i" [value]="i">
             <label [for]="i">
@@ -35,16 +36,22 @@
 
   <div id="answer-btns" class="ui stackable two column grid">
     <div class="eight wide column">
-      <button class="ui basic large button" (click)="toggleFlag()">
+      <button class="ui basic large button"
+        [class.disabled]="!active"
+        (click)="toggleFlag()">
         <i class="flag icon" [class.red]="flagged" [class.grey]="!flagged"></i>
         Review Later
       </button>
-      <button class="ui large positive right labeled icon button">
-        <i class="right arrow icon"></i>Next
+      <button (click)="submit()" [class.disabled]="!active"
+        class="ui large positive right labeled icon button">
+        <i class="arrow icon"
+          [class.right]="hasNext()"
+          [class.checkmark]="!hasNext()">
+        </i>{{ hasNext()? 'Next' : 'End'}}
       </button>
     </div>
     <div class="right floated right aligned four wide column">
-      <a class="ui icon button">
+      <a [class.disabled]="!active" class="ui icon button">
         Review All
       </a>
     </div>

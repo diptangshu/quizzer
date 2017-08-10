@@ -1,4 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  Input,
+  Output,
+  EventEmitter
+} from '@angular/core';
 
 @Component({
   selector: 'app-timer',
@@ -7,7 +13,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TimerComponent implements OnInit {
 
-  duration: number; // in seconds
+  @Input() duration: number = 0; // in seconds
+  @Output() expired = new EventEmitter();
+
   timeLeft: number;
 
   hours: number;
@@ -21,7 +29,7 @@ export class TimerComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    this.duration = 3600; // TODO get from server
+    this.duration;
     this.timeLeft = this.duration;
     this.refresh();
 
@@ -34,8 +42,10 @@ export class TimerComponent implements OnInit {
   tick(): boolean {
     if (this.timeLeft == 0) {
       clearInterval(this.timerInterval);
+      this.expired.emit();
       return false;
     }
+
     this.timeLeft--;
     this.refresh();
     return true;
@@ -51,7 +61,7 @@ export class TimerComponent implements OnInit {
   }
 
   computeIconState() {
-    let progress = this.timeLeft / this.duration;
+    let progress = this.duration === 0? 0 : this.timeLeft / this.duration;
     return this.iconStates[
       Math.round(this.lerp(0, this.iconStates.length - 1, progress))
     ];

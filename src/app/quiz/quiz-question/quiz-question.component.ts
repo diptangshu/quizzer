@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 import { QuizService } from '../quiz.service';
+import { QuizQuestion } from './quiz-question';
 
 @Component({
   selector: 'app-quiz-question',
@@ -9,36 +10,52 @@ import { QuizService } from '../quiz.service';
 })
 export class QuizQuestionComponent implements OnInit {
 
-  question: any;
-  flagged: boolean = true;
-  loading: boolean = true;
+  @Input() active: boolean;
+  @Input() current: number;
+
+  question = new QuizQuestion();
+  flagged: boolean;
+  loaded: boolean;
 
   constructor(private quizService: QuizService) { }
 
   ngOnInit() {
-    this.loading = true;
-    this.quizService.getQuestionSlowly(0).then(question => {
-      this.question = question;
-      this.loading = false;
-    });
+    this.load();
   }
 
   toggleFlag() { this.flagged = !this.flagged; }
 
   hasMultipleAnswers(): boolean {
-    // TODO Refactor logic to domain class Question.
-    if (!this.question) return false;
-
-    if (!this.question.answer) {
-      console.error('No answer choices specified with question!');
-      return false;
-    }
-
-    if (!this.question.answer.correct) {
-      console.error('No correct answer specified with question!');
-      return false;
-    }
-
-    return this.question.answer.correct.length > 1;
+    return this.question.hasMultipleAnswers();
   }
+
+  hasNext(): boolean {
+    return this.question.hasNext();
+  }
+
+  submit() {
+    if (!this.active) return;
+    
+    if (this.next()) {
+      this.load();
+    }
+  }
+
+  private load() {
+    if (!this.current) return;
+
+    this.loaded = false;
+    this.quizService.getQuestion(this.current).subscribe(
+      question => this.question = question,
+      (err) => console.error(err.json().error),
+      () => this.loaded = true
+    );
+  }
+
+  private next(): boolean {
+    if (!this.hasNext()) return false;
+    this.current = this.question.next;
+    return true;
+  }
+
 }

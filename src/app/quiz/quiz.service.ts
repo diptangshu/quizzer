@@ -1,36 +1,22 @@
 import { Injectable } from '@angular/core';
+import { Http } from '@angular/http';
+import { Observable } from 'rxjs/Observable';
+
+import { QuizQuestion } from './quiz-question/quiz-question';
+
+import 'rxjs/add/operator/map';
 
 @Injectable()
 export class QuizService {
 
-  constructor() { }
+  private url = 'api/questions';
 
-  getQuestion(sequence: number): Promise<any> {
-    return Promise.resolve({
-      sequence: 5,
-      body: `
-        <pre class="line-numbers"><code class="language-xml">&lt;person&gt;Some xml code&lt;/person&gt;</code></pre>
-        <img class="ui bordered centered rounded image" src="http://lorempixel.com/600/400" width="600" height="400" alt="some image"/>
-        <p>Some text about the following code goes here...</p>
-<pre class="line-numbers"><code class="language-java">public static void main(int argc, String[] argv) {
-  // code...
-  int x;
-}</code></pre>
-        <p>Some more text...</p>
-      `,
-      hint: 'The value passed in String.format() is...',
-      answer: {
-        choices: [ 'Diptangshu', 'Zubin', 'Diptchak', 'Guitarman'],
-        correct: [0, 1]
-      }
-    });
-  }
+  constructor(private http: Http) { }
 
-  getQuestionSlowly(sequence: number): Promise<any> {
-    return new Promise(resolve => {
-      // Simulate server latency
-      setTimeout(() => resolve(this.getQuestion(sequence)), 2000);
-    });
+  getQuestion(id: number) {
+    return this.http.get(`${this.url}/${id}`)
+      .map(response => response.json())
+      .map(data => Object.assign(new QuizQuestion, data.data));
   }
 
 }

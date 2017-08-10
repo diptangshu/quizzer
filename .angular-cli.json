@@ -24,9 +24,7 @@
         "assets/prism.css"
       ],
       "scripts": [
-        "assets/prism.js",
-        "../node_modules/jquery/dist/jquery.min.js",
-        "../semantic/dist/semantic.min.js"
+        "assets/prism.js"
       ],
       "environmentSource": "environments/environment.ts",
       "environments": {

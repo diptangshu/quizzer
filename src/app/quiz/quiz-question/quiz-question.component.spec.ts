@@ -1,27 +1,14 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { QuizQuestionComponent } from './quiz-question.component';
-import { WordPipe } from '../../pipes/word.pipe';
-import { AlphabetPipe } from '../../pipes/alphabet.pipe';
-
-import { QuizService } from '../quiz.service';
+import { MODULE_DEF } from '../../module-def';
 
 describe('QuizQuestionComponent', () => {
   let component: QuizQuestionComponent;
   let fixture: ComponentFixture<QuizQuestionComponent>;
 
   beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [
-        QuizQuestionComponent,
-        AlphabetPipe,
-        WordPipe
-      ],
-      providers: [
-        QuizService
-      ]
-    })
-    .compileComponents();
+    TestBed.configureTestingModule(MODULE_DEF).compileComponents();
   }));
 
   beforeEach(() => {
@@ -40,23 +27,22 @@ describe('QuizQuestionComponent', () => {
     });
 
     it('should return false when no answer is provided for question', () => {
-      component.question = {};
       expect(component.hasMultipleAnswers()).toBeFalsy();
     });
 
     it('should return false when no correct answer is provided for question', () => {
-      component.question = { answer: {} };
       expect(component.hasMultipleAnswers()).toBeFalsy();
     });
 
     it('should return false when only one correct answer', () => {
-      component.question = { answer: { correct: [0] } };
+      component.question.answer.correct = [0];
       expect(component.hasMultipleAnswers()).toBeFalsy();
     });
 
-    it('should return true when only one correct answer', () => {
-      component.question = { answer: { correct: [0, 1] } };
+    it('should return true when multiple correct answer', () => {
+      component.question.answer.correct = [0, 1];
       expect(component.hasMultipleAnswers()).toBeTruthy();
     });
   });
+
 });

@@ -23,7 +23,7 @@
       </div>
     </div>
     <div class="three wide center aligned column">
-      <app-timer></app-timer>
+      <app-timer [duration]="time" (expired)="hasExpired()"></app-timer>
     </div>
   </div>
 </div>

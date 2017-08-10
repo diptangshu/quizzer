@@ -1,3 +1,4 @@
 i.flag.icon { cursor: pointer; }
 #question { min-height: 10em; }
 #answer-btns { margin-top: 1em; }
+.answer-choices label { cursor: pointer; }

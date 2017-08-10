@@ -2,17 +2,14 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { TimerComponent } from './timer.component';
 
-import { PaddingPipe } from '../pipes/padding.pipe';
+import { MODULE_DEF } from '../module-def';
 
 describe('TimerComponent', () => {
   let component: TimerComponent;
   let fixture: ComponentFixture<TimerComponent>;
 
   beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [ TimerComponent, PaddingPipe ]
-    })
-    .compileComponents();
+    TestBed.configureTestingModule(MODULE_DEF).compileComponents();
   }));
 
   beforeEach(() => {

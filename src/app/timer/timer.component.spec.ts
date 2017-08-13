@@ -15,6 +15,7 @@ describe('TimerComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(TimerComponent);
     component = fixture.componentInstance;
+    component.duration = 1;
     fixture.detectChanges();
   });
 
@@ -40,6 +41,20 @@ describe('TimerComponent', () => {
       expect(component.tick()).toBeFalsy();
       expect(component.timeLeft).toBe(0);
     });
+
+    it('should reamin active when time has not expires', () => {
+      expect(component.active).toBeTruthy();
+      component.tick();
+      expect(component.active).toBeTruthy();
+    });
+
+    it('should make inactive when time expires', () => {
+      component.duration = 1;
+      expect(component.active).toBeTruthy();
+      component.tick();
+      component.tick();
+      expect(component.active).toBeFalsy();
+    });
   });
 
   describe('computeIconState()', () => {
@@ -48,8 +63,9 @@ describe('TimerComponent', () => {
       let testingTimes = [0, 5, 10, -1, 11];
       for (let i = 0; i < testingTimes.length; i++) {
         component.timeLeft = testingTimes[i];
-        let iconState = component.computeIconState();
-        expect(component.iconStates.includes(iconState)).toBeTruthy();
+        component.computeIconState();
+        expect(component.iconStates.includes(component.iconState))
+          .toBeTruthy();
       }
     });
   });

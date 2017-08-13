@@ -17,6 +17,7 @@ export class TimerComponent implements OnInit {
   @Output() expired = new EventEmitter();
 
   timeLeft: number;
+  active: boolean;
 
   hours: number;
   minutes: number;
@@ -24,12 +25,15 @@ export class TimerComponent implements OnInit {
 
   timerInterval: any;
   iconStates = ['end', 'half', 'start'];
-  iconState: string;
+  iconStateInactive = 'empty';
+  iconState:string;
 
   constructor() { }
 
   ngOnInit() {
-    this.duration;
+    if (this.duration <= 0) return;
+
+    this.active = true;
     this.timeLeft = this.duration;
     this.refresh();
 
@@ -43,6 +47,8 @@ export class TimerComponent implements OnInit {
     if (this.timeLeft == 0) {
       clearInterval(this.timerInterval);
       this.expired.emit();
+      this.active = false;
+      this.computeIconState();
       return false;
     }
 
@@ -57,12 +63,17 @@ export class TimerComponent implements OnInit {
     this.minutes  = Math.floor((t / (1000 * 60)) % 60);
     this.hours    = Math.floor((t / (1000 * 60 * 60)) % 24);
 
-    this.iconState = this.computeIconState();
+    this.computeIconState();
   }
 
   computeIconState() {
+    if (!this.active) {
+      this.iconState = this.iconStateInactive;
+      return;
+    }
+
     let progress = this.duration === 0? 0 : this.timeLeft / this.duration;
-    return this.iconStates[
+    this.iconState = this.iconStates[
       Math.round(this.lerp(0, this.iconStates.length - 1, progress))
     ];
   }

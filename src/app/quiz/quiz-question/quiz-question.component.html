@@ -40,10 +40,10 @@
         [class.disabled]="!active"
         (click)="toggleFlag()">
         <i class="flag icon" [class.red]="flagged" [class.grey]="!flagged"></i>
-        Review Later
+        Flag for Review
       </button>
       <button (click)="submit()" [class.disabled]="!active"
-        class="ui large positive right labeled icon button">
+        class="ui large primary right labeled icon button">
         <i class="arrow icon"
           [class.right]="hasNext()"
           [class.checkmark]="!hasNext()">
@@ -51,8 +51,9 @@
       </button>
     </div>
     <div class="right floated right aligned four wide column">
-      <a [class.disabled]="!active" class="ui icon button">
-        Review All
+      <a [class.disabled]="!active" class="ui button"
+        (click)="gotoReview()">
+        Review
       </a>
     </div>
   </div>

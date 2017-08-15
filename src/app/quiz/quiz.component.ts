@@ -8,6 +8,9 @@ import { Component, OnInit } from '@angular/core';
 export class QuizComponent implements OnInit {
 
   active: boolean;
+  duration: number = 600;
+  currentQuestionId = 1;
+  reviewHidden: boolean = true;
 
   constructor() { }
 
@@ -19,5 +22,7 @@ export class QuizComponent implements OnInit {
     this.active = false;
     alert('Time to stop!');
   }
+
+  showReview() { this.reviewHidden = false; }
 
 }

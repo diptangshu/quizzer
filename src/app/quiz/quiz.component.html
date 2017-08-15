@@ -1,2 +1,13 @@
-<app-quiz-progress (timeUp)="timeUp()"></app-quiz-progress>
-<app-quiz-question [active]="active" [current]="1"></app-quiz-question>
+<app-quiz-progress
+  [duration]="duration"
+  (timeUp)="timeUp()">
+</app-quiz-progress>
+
+<app-quiz-review *ngIf="!reviewHidden"></app-quiz-review>
+
+<app-quiz-question
+  *ngIf="reviewHidden"
+  [active]="active"
+  [currentId]="1"
+  (review)="showReview()">
+</app-quiz-question>

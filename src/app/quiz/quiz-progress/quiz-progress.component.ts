@@ -13,7 +13,7 @@ import {
 })
 export class QuizProgressComponent implements OnInit {
 
-  @Input() time = 10; // seconds
+  @Input() duration: number; // seconds
   @Output() timeUp = new EventEmitter();
 
   constructor() { }

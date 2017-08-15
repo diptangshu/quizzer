@@ -12,6 +12,7 @@ import { TopNavComponent } from './top-nav/top-nav.component';
 import { FooterComponent } from './footer/footer.component';
 import { QuizComponent } from './quiz/quiz.component';
 import { QuizProgressComponent } from './quiz/quiz-progress/quiz-progress.component';
+import { QuizReviewComponent } from './quiz/quiz-review/quiz-review.component';
 import { QuizQuestionComponent } from './quiz/quiz-question/quiz-question.component';
 import { AlphabetPipe } from './pipes/alphabet.pipe';
 import { WordPipe } from './pipes/word.pipe';
@@ -31,7 +32,8 @@ import { QuizService } from './quiz/quiz.service';
     WordPipe,
     TimerComponent,
     PaddingPipe,
-    QuizComponent
+    QuizComponent,
+    QuizReviewComponent
   ],
   imports: [
     BrowserModule,

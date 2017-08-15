@@ -1,4 +1,10 @@
-import { Component, OnInit, Input } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  Input,
+  Output,
+  EventEmitter
+} from '@angular/core';
 
 import { QuizService } from '../quiz.service';
 import { QuizQuestion } from './quiz-question';
@@ -11,7 +17,9 @@ import { QuizQuestion } from './quiz-question';
 export class QuizQuestionComponent implements OnInit {
 
   @Input() active: boolean;
-  @Input() current: number;
+  @Input() currentId: number;
+
+  @Output() review = new EventEmitter();
 
   question = new QuizQuestion();
   flagged: boolean;
@@ -35,17 +43,21 @@ export class QuizQuestionComponent implements OnInit {
 
   submit() {
     if (!this.active) return;
-    
+
     if (this.next()) {
       this.load();
     }
   }
 
+  gotoReview() {
+    this.review.emit();
+  }
+
   private load() {
-    if (!this.current) return;
+    if (!this.currentId) return;
 
     this.loaded = false;
-    this.quizService.getQuestion(this.current).subscribe(
+    this.quizService.getQuestion(this.currentId).subscribe(
       question => this.question = question,
       (err) => console.error(err.json().error),
       () => this.loaded = true
@@ -54,7 +66,7 @@ export class QuizQuestionComponent implements OnInit {
 
   private next(): boolean {
     if (!this.hasNext()) return false;
-    this.current = this.question.next;
+    this.currentId = this.question.next;
     return true;
   }
 

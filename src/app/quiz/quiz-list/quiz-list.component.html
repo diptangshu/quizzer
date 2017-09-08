@@ -1,0 +1,18 @@
+<div class="ui top attached tabular menu">
+  <a class="item"
+    [class.active]="active==='pending'" (click)="active='pending'"
+    data-tab="pending">Pending
+  </a>
+  <a class="item"
+    [class.active]="active==='completed'" (click)="active='completed'"
+    data-tab="completed">Completed
+  </a>
+</div>
+<div class="ui bottom attached tab segment"
+  [class.active]="active==='pending'" data-tab="pending">
+  <app-quiz-list-pending></app-quiz-list-pending>
+</div>
+<div class="ui bottom attached tab segment"
+  [class.active]="active==='completed'" data-tab="completed">
+  <app-quiz-list-completed></app-quiz-list-completed>
+</div>

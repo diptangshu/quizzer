@@ -20,6 +20,11 @@ import { TimerComponent } from './timer/timer.component';
 import { PaddingPipe } from './pipes/padding.pipe';
 
 import { QuizService } from './quiz/quiz.service';
+import { QuizListComponent } from './quiz/quiz-list/quiz-list.component';
+import { ProfileComponent } from './profile/profile.component';
+import { HomeComponent } from './home/home.component';
+import { QuizListPendingComponent } from './quiz/quiz-list/quiz-list-pending.component';
+import { QuizListCompletedComponent } from './quiz/quiz-list/quiz-list-completed.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +38,12 @@ import { QuizService } from './quiz/quiz.service';
     TimerComponent,
     PaddingPipe,
     QuizComponent,
-    QuizReviewComponent
+    QuizReviewComponent,
+    QuizListComponent,
+    ProfileComponent,
+    HomeComponent,
+    QuizListPendingComponent,
+    QuizListCompletedComponent
   ],
   imports: [
     BrowserModule,

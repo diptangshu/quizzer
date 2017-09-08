@@ -1,0 +1,24 @@
+<div class="ui divided items">
+  <div *ngFor="let quiz of quizzes" class="item">
+    <div class="ui small image">
+      <img [src]="quiz.thumbnail">
+    </div>
+    <div class="content">
+      <a class="header">{{quiz.name}}</a>
+      <div class="meta">
+        <span class="duration">Time: 1 hour</span>
+        <span class="questions">Questions: {{quiz.totalQuestions}}</span>
+        <span class="cuttoff">Pass: {{quiz.cuttoffPercent}}%</span>
+      </div>
+      <div class="description">
+        <p>{{quiz.description}}</p>
+      </div>
+      <div class="extra">
+        <div class="ui right floated primary button">
+          Start
+          <i class="right chevron icon"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

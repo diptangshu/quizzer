@@ -1,0 +1,29 @@
+<div class="ui divided items">
+  <div *ngFor="let quiz of quizzes" class="item">
+    <div class="ui tiny image">
+      <img [src]="quiz.thumbnail">
+    </div>
+    <div class="content">
+      <a class="header">{{quiz.name}}</a>
+      <div class="meta">
+        <span class="result">
+          <i class="icon"
+            [class.yellow]="quiz.result.winner"
+            [class.trophy]="quiz.result.winner"
+
+            [class.green]="!quiz.result.winner && quiz.result.passed"
+            [class.checkmark]="!quiz.result.winner && quiz.result.passed"
+
+            [class.red]="!quiz.result.passed"
+            [class.remove]="!quiz.result.passed">
+          </i>
+          <ng-container *ngIf="quiz.result.winner">Winner</ng-container>
+          <ng-container *ngIf="!quiz.result.winner && quiz.result.passed">Passed</ng-container>
+          <ng-container *ngIf="!quiz.result.passed">Failed</ng-container>
+        </span>
+        <span class="score">Score: {{quiz.result.score}}%</span>
+      </div>
+      <div class="description">{{quiz.description}}</div>
+    </div>
+  </div>
+</div>
